@@ -3,15 +3,19 @@
 #include <vector>
 #include <queue>
 #include <bitset>
+#include <string>
 
 using namespace std;
+
+long int T[1000000] = { 0 };
+vector<long int> record;
+
 
 int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
 
-	long long int T[1000000] = { 0 };
 	int train, order;
 	int cnt = 0;
 	cin >> train >> order;
@@ -39,8 +43,26 @@ int main() {
 		}
 	}
 	for (int i = 0; i < train; i++) {
-
+		int check = 1;
+		if (record.empty()) {
+			cnt++;
+			record.push_back(T[i]);
+			continue;
+		}
+		else {
+			for (int j = 0; j < record.size(); j++) {
+				if (record[j] == T[i]) {
+					check = 0;
+					break;
+				}
+			}
+		}
+		if (check == 1) {
+			cnt++;
+			record.push_back(T[i]);
+		}
 	}
+	cout << cnt << '\n';
 	/*int a = 0;
 	a = a | (1 << 1);
 	cout << bitset<8>(a) << endl;
